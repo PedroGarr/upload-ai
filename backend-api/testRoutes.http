@@ -14,3 +14,12 @@ Content-Type: audio/mpeg
 < ./1.example.mp3
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
+###
+
+# @name create-transcription
+POST http://localhost:3333/videos/bb166cbb-b596-4fe0-8c72-883117e68dbf/transcription
+Content-Type: application/json
+
+{
+    "prompt": "erlang,elixir"
+}
