@@ -23,3 +23,15 @@ Content-Type: application/json
 {
     "prompt": "erlang,elixir"
 }
+
+###
+
+# @name generate-ai-completion
+POST http://localhost:3333/ai/generate
+Content-Type: application/json
+
+{
+    "videoId": "bc82218b-e8bc-46bf-838d-91d26eab8681",
+    "temperature": 0.5,
+    "template": "Summarize the following video's transcription: '''{transcription}''' "
+}
