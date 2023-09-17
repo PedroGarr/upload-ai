@@ -3,10 +3,12 @@ import { Separator } from "./ui/separator";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useMemo, useRef, useState } from "react";
 
 export function VideoInputForm(){
     const [videoFile, setVideoFile] = useState<File | null >(null)
+
+    const promptInputRef = useRef<HTMLTextAreaElement>(null)
 
     function handleSelectedFile(event: ChangeEvent<HTMLInputElement>){
         const {files} = event.currentTarget
@@ -20,7 +22,25 @@ export function VideoInputForm(){
         setVideoFile(selectedFile)
     }
 
-    
+    function convertVideoToAudio(video:File){
+        
+    }
+
+    function handleUploadVideo(event: FormEvent<HTMLFormElement>){
+        event.preventDefault()
+
+        const prompt = promptInputRef.current?.value
+
+        if(!videoFile){
+            return
+        }
+
+        //Functions that converts video in audio with web assembly
+
+
+
+
+    }
 
     const previewURL = useMemo(() =>{
         if (!videoFile){
@@ -32,7 +52,7 @@ export function VideoInputForm(){
 
 
     return(
-        <form className='space-y-6'>
+        <form onSubmit={handleUploadVideo} className='space-y-6'>
             <label 
               htmlFor='video'
               className='relative border flex rounded-md aspect-video cursor-pointer border-dashed text-sm flex-col gap-2 items-center justify-center text-muted-foreground hover:bg-primary/10'
@@ -53,7 +73,8 @@ export function VideoInputForm(){
 
             <div className='space-y-2'>
               <Label htmlFor='transcription_prompt'> Transcription prompt</Label>
-              <Textarea 
+              <Textarea
+              ref = {promptInputRef} 
               id='transcription_prompt' 
               className='h-20 leading-relaxed resize-none'
               placeholder='Include keywords mentioned on your video separated by commas (,)'
