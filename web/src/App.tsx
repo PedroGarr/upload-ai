@@ -8,6 +8,11 @@ import { Slider } from './components/ui/slider';
 import { VideoInputForm } from './components/video-input-form';
 
 
+
+
+//Voce parou em 32:44 minutos do video
+
+
  export function App() {
   return (
    <div className='min-h-screen flex flex-col'>
