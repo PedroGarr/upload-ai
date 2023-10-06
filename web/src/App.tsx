@@ -10,7 +10,7 @@ import { VideoInputForm } from './components/video-input-form';
 
 
 
-//Voce parou em 32:44 minutos do video
+//Voce parou em 43:40 minutos do video
 
 
  export function App() {
