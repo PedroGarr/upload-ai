@@ -80,21 +80,27 @@ export function VideoInputForm(){
             return
         }
 
+        setStatus('converting')
         //Functions that converts video in audio with web assembly
+
         const audioFile = await convertVideoToAudio(videoFile)
 
         const data = new FormData()
 
         data.append('file', audioFile)
 
+        setStatus('uploading')
+
         const response = await api.post('/videos', data)
 
         const videoId = response.data.video.id
 
+        setStatus('generating')
+
         await api.post(`/videos/${videoId}/transcription`, {
           prompt,
         })
-        console.log("C'est fini")
+        setStatus('success')
     }
 
     const previewURL = useMemo(() =>{
@@ -130,13 +136,14 @@ export function VideoInputForm(){
               <Label htmlFor='transcription_prompt'> Transcription prompt</Label>
               <Textarea
               ref = {promptInputRef} 
+              disabled={status != 'waiting' } 
               id='transcription_prompt' 
               className='h-20 leading-relaxed resize-none'
               placeholder='Include keywords mentioned on your video separated by commas (,)'
               />
             </div>
 
-            <Button type='submit' className='w-full'>
+            <Button disabled={status != 'waiting' } type='submit' className='w-full'>
               Load video
               <Upload className='w-4 h-4 ml-2'/> 
             </Button>
