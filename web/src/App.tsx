@@ -12,12 +12,13 @@ import { useState } from 'react';
 
 
 
-//Voce parou em 43:40 minutos do video
+//Voce parou em 72:13 minutos do video
 
 
  export function App() {
 
   const [temperature, setTemperature] =useState(0.5)
+  const [videoId, setVideoId] = useState<string | null>(null)
 
   function handlePromptSelected(template: string){
     console.log(template)
@@ -60,7 +61,7 @@ import { useState } from 'react';
 
         <aside className='w-80 space-y-6'>
           
-          <VideoInputForm/>
+          <VideoInputForm onVideoUploaded={setVideoId}/>
 
           <Separator/>
           
