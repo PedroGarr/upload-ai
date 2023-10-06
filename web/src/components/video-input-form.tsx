@@ -8,8 +8,12 @@ import { getFFmpeg } from "@/lib/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
 import { api } from "@/lib/axios";
 
+type Status = 'waiting' | 'converting' | 'uploading' |'generating' | 'success' 
+
 export function VideoInputForm(){
     const [videoFile, setVideoFile] = useState<File | null >(null)
+
+    const[status, setStatus] = useState<Status>('waiting')
 
     const promptInputRef = useRef<HTMLTextAreaElement>(null)
 
